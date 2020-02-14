@@ -4,12 +4,21 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
 
+# urls should be of the following form:
+# "https://classroom.udacity.com/courses/XXX/lessons/XXX/concepts/
+LESSON_URLS = []
 
-def main():
+
+def main(lesson_urls):
     options = Options()
     options.add_argument("--headless")
     driver = webdriver.Chrome(options=options)
     login(driver)
+    i = 0
+    for lesson_url in lesson_urls:
+        i += 1
+        print(f"Retrieving concepts for lesson {i} of {len(lesson_urls)}")
+        concept_urls = get_concepts(driver, lesson_url)
 
 
 def login(driver):
@@ -31,5 +40,31 @@ def login(driver):
     print("Logged in successfully!")
 
 
+def get_concepts(driver, lesson_url):
+    """Gets all the concept urls for a given lesson
+
+    Args:
+        driver: A webdriver object used to navigate to the lesson page and
+            retrieve the concept urls
+        lesson_url: A str that represent the target lesson url
+
+    Returns:
+        concept_urls: A list of strs representing the retrieved concept urls
+    """
+    driver.get(lesson_url)
+    time.sleep(5)
+    concept_urls = []
+    anchors = driver.find_elements_by_xpath("//a[@href]")
+    for anchor in anchors:
+        href = anchor.get_attribute("href").split('#')[0]
+        if (
+            href.startswith("https://classroom.udacity.com/")
+            and href not in concept_urls
+        ):
+            concept_urls.append(href)
+    print(f"Retrieved {len(concept_urls)} concepts")
+    return concept_urls
+
+
 if __name__ == "__main__":
-    main()
+    main(LESSON_URLS)
