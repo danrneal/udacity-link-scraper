@@ -15,6 +15,7 @@ def main(lesson_urls):
     driver = webdriver.Chrome(options=options)
     login(driver)
     links = []
+
     i = 0
     for lesson_url in lesson_urls:
         i += 1
@@ -27,6 +28,10 @@ def main(lesson_urls):
                 f"Getting Udacity links for concept {j} of {len(concept_urls)}"
             )
             links = get_links(driver, concept_url, links)
+
+    print(f"Found {len(links)} Udacity links:")
+    for link in links:
+        print(link)
 
 
 def login(driver):
