@@ -14,11 +14,19 @@ def main(lesson_urls):
     options.add_argument("--headless")
     driver = webdriver.Chrome(options=options)
     login(driver)
+    links = []
     i = 0
     for lesson_url in lesson_urls:
         i += 1
         print(f"Retrieving concepts for lesson {i} of {len(lesson_urls)}")
         concept_urls = get_concepts(driver, lesson_url)
+        j = 0
+        for concept_url in concept_urls:
+            j += 1
+            print(
+                f"Getting Udacity links for concept {j} of {len(concept_urls)}"
+            )
+            links = get_links(driver, concept_url, links)
 
 
 def login(driver):
@@ -64,6 +72,35 @@ def get_concepts(driver, lesson_url):
             concept_urls.append(href)
     print(f"Retrieved {len(concept_urls)} concepts")
     return concept_urls
+
+
+def get_links(driver, concept_url, links):
+    """Gets all the Udacity links in a given lesson
+
+    Args:
+        driver: A webdriver object used to navigate to the concept page and
+            retrieve all the Udacity links
+        concept_url: A str that represents the target concept url
+        links: A list of strs representing Udacity links that have already been
+            collected in the current search
+
+    Returns:
+        links: A list of strs representing all the previous and new links that
+            have been collected in the current search
+    """
+    driver.get(concept_url)
+    time.sleep(5)
+    anchors = driver.find_elements_by_xpath("//a[@href]")
+    for anchor in anchors:
+        href = anchor.get_attribute("href").split('#')[0]
+        if (
+            "udacity" in href
+            and not href.startswith("https://classroom.udacity.com/")
+            and not href.startswith("mailto")
+            and href not in links
+        ):
+            links.append(href)
+    return links
 
 
 if __name__ == "__main__":
