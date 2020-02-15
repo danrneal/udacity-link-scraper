@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
 
+"""A script that uses selenium to get all Udacity links from a given lesson.
+
+    Usage: scraper.py
+"""
+
 import os
 import time
 from selenium import webdriver
@@ -12,6 +17,12 @@ LESSON_URLS = []
 
 
 def main(lesson_urls):
+    """Main function call, prints all the links collected by the script
+
+    Args:
+        lesson_urls: A list of strs representing a url from each lesson
+    """
+
     options = Options()
     options.add_argument("--headless")
     driver = webdriver.Chrome(options=options)
