@@ -13,7 +13,7 @@ Set-up a virtual environment and activate it:
 python3 -m venv venv
 source venv/bin/activate
 ```
-You shoud see (venv) before your command prompt now. (You can type `deactivate`
+You should see (venv) before your command prompt now. (You can type `deactivate`
 to exit the virtual environment any time.)
 
 Install the requirements:
