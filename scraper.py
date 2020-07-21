@@ -16,12 +16,11 @@ LESSON_URLS = []
 
 
 def main(lesson_urls):
-    """Main function call, prints all the links collected by the script
+    """Main function call, prints all the links collected by the script.
 
     Args:
         lesson_urls: A list of strs representing a url from each lesson
     """
-
     options = Options()
     options.add_argument("--headless")
     driver = webdriver.Chrome(options=options)
@@ -66,7 +65,7 @@ def login(driver):
 
 
 def get_concepts(driver, lesson_url):
-    """Gets all the concept urls for a given lesson
+    """Gets all the concept urls for a given lesson.
 
     Args:
         driver: A webdriver object used to navigate to the lesson page and
@@ -92,7 +91,7 @@ def get_concepts(driver, lesson_url):
 
 
 def get_links(driver, concept_url, links):
-    """Gets all the Udacity links in a given lesson
+    """Gets all the Udacity links in a given lesson.
 
     Args:
         driver: A webdriver object used to navigate to the concept page and
