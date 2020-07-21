@@ -1,6 +1,9 @@
 """A script that uses selenium to get all Udacity links from a given lesson.
 
-    Usage: scraper.py
+Usage: scraper.py
+
+Attributes:
+    LESSON_URLS: A list of strs representing urls to lessons on Udacity
 """
 
 import os
