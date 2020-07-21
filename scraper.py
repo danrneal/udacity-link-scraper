@@ -49,17 +49,17 @@ def main(lesson_urls):
 
 
 def login(driver):
-    """Logs a udacity user in with their email and password
+    """Logs a udacity user in with their email and password.
 
     Args:
         driver: A webdriver object used to log the user in
     """
-    email = os.environ['UDACITY_EMAIL']
-    password = os.environ['UDACITY_PASSWORD']
+    email = os.environ["UDACITY_EMAIL"]
+    password = os.environ["UDACITY_PASSWORD"]
     print(f"Attempting to log in as {email}...")
     driver.get("https://classroom.udacity.com/")
     login_form = driver.find_elements_by_xpath("//input[@data-cy]")
-    login_form[0].send_keys(os.environ['UDACITY_EMAIL'])
+    login_form[0].send_keys(os.environ["UDACITY_EMAIL"])
     login_form[1].send_keys(password)
     login_form[1].send_keys(Keys.ENTER)
     while "Sign In" in driver.page_source:
@@ -83,7 +83,7 @@ def get_concepts(driver, lesson_url):
     concept_urls = []
     anchors = driver.find_elements_by_xpath("//a[@href]")
     for anchor in anchors:
-        href = anchor.get_attribute("href").split('#')[0]
+        href = anchor.get_attribute("href").split("#")[0]
         if (
             href.startswith("https://classroom.udacity.com/")
             and href not in concept_urls
@@ -111,7 +111,7 @@ def get_links(driver, concept_url, links):
     time.sleep(5)
     anchors = driver.find_elements_by_xpath("//a[@href]")
     for anchor in anchors:
-        href = anchor.get_attribute("href").split('#')[0]
+        href = anchor.get_attribute("href").split("#")[0]
         if (
             "udacity" in href
             and not href.startswith("https://classroom.udacity.com/")
