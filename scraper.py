@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 """A script that uses selenium to get all Udacity links from a given lesson.
 
     Usage: scraper.py
