@@ -5,9 +5,10 @@
 
 import os
 import time
+
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.keys import Keys
 
 # urls should be of the following form:
 # "https://classroom.udacity.com/courses/XXX/lessons/XXX/concepts/
