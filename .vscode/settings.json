@@ -1,0 +1,12 @@
+{
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": true
+  },
+  "editor.formatOnSave": true,
+  "python.formatting.provider": "black",
+  "python.linting.flake8Enabled": true,
+  "python.linting.pylintCategorySeverity.refactor": "Information",
+  "python.linting.pylintUseMinimalCheckers": false,
+  "python.pythonPath": "env/bin/python3",
+  "python.terminal.activateEnvInCurrentTerminal": true
+}
